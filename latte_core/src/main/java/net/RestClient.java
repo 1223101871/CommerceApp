@@ -36,7 +36,7 @@ public class RestClient {
     public RestClient(String url, Map<String, Object> params,
                       ISuccess success, IRequest request,
                       IFailure failure, IError error,
-                      RequestBody body,Context context,LoaderStyle loaderStyle) {
+                      RequestBody body, Context context, LoaderStyle loaderStyle) {
         this.URL = url;
         this.PARAMS.putAll(params);
         this.SUCCESS = success;
@@ -58,8 +58,8 @@ public class RestClient {
         if (REQUEST != null) {
             REQUEST.requestStart();
         }
-        if (LOADER_STYLE != null){
-            LatteLoader.showLoading(CONTEXT,LOADER_STYLE);
+        if (LOADER_STYLE != null) {
+            LatteLoader.showLoading(CONTEXT, LOADER_STYLE);
         }
         switch (method) {
             case GET:
@@ -68,6 +68,11 @@ public class RestClient {
             case PUT:
                 call = service.put(URL, PARAMS);
                 break;
+
+            case POST_RAW:
+                call = service.postRaw(URL, BODY);
+                break;
+
             case POST:
                 call = service.post(URL, PARAMS);
                 break;
@@ -84,19 +89,29 @@ public class RestClient {
 
     private Callback<String> getRequestCallback() {
         return new RequsetCallbacks(
-                SUCCESS, REQUEST, FAILURE, ERROR,LOADER_STYLE);
+                SUCCESS, REQUEST, FAILURE, ERROR, LOADER_STYLE);
     }
 
-    public final void get(){
+    public final void get() {
         request(HttpMethod.GET);
     }
-    public final void post(){
-        request(HttpMethod.POST);
+
+    public final void post() {
+        if (BODY == null){
+            request(HttpMethod.POST);
+        }else {
+            if (!PARAMS.isEmpty()){
+                throw new RuntimeException("params must be null");
+            }
+            request(HttpMethod.POST_RAW);
+        }
     }
-    public final void put(){
+
+    public final void put() {
         request(HttpMethod.PUT);
     }
-    public final void delete(){
+
+    public final void delete() {
         request(HttpMethod.DELETE);
     }
 }
