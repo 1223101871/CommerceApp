@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-
+apply plugin: 'com.jakewharton.butterknife'
 android {
     compileSdkVersion 28
 
@@ -22,37 +22,44 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-
-
+    api fileTree(include: ['*.jar'], dir: 'libs')
     //fragmentation依赖
-    implementation 'me.yokeyword:fragmentation:1.3.6'
-    implementation 'me.yokeyword:fragmentation-swipeback:1.3.6'
-
+    api 'me.yokeyword:fragmentation:1.3.6'
+    api 'me.yokeyword:fragmentation-swipeback:1.3.6'
     //Butterknife
-    implementation 'com.jakewharton:butterknife:8.4.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
-
+    api 'com.jakewharton:butterknife:9.0.0-rc2'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0-rc2'
     //字体图标
-    implementation 'com.joanzapata.iconify:android-iconify-ionicons:2.2.2'
-    implementation 'com.joanzapata.iconify:android-iconify-fontawesome:2.2.2'
-
+    api 'com.joanzapata.iconify:android-iconify-ionicons:2.2.2'
+    api 'com.joanzapata.iconify:android-iconify-fontawesome:2.2.2'
     //网络请求依赖
-    implementation 'com.squareup.okio:okio:1.13.0'
-    implementation 'com.squareup.okhttp3:okhttp:3.8.1'
-    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
-    implementation 'com.squareup.retrofit2:converter-scalars:2.3.0'
-
+    api 'com.squareup.okio:okio:1.13.0'
+    api 'com.squareup.okhttp3:okhttp:3.8.1'
+    api 'com.squareup.retrofit2:retrofit:2.3.0'
+    api 'com.squareup.retrofit2:converter-scalars:2.3.0'
     //Loader依赖
-    implementation 'com.wang.avi:library:2.1.3'
+    api 'com.wang.avi:library:2.1.3'
 
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support:support-v4:28.0.0'
+    //JSON依赖Android版
+    api 'com.alibaba:fastjson:1.1.57.android'
+
+    //Banner
+    api 'com.bigkoo:ConvenientBanner:2.1.4'
+
+    api 'com.android.support:appcompat-v7:28.0.0'
+    api 'com.android.support:support-v4:28.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation project(':latte_annotations')
+    api project(':latte_annotations')
+    api 'io.reactivex.rxjava2:rxjava:2.2.5'
+
+
 }

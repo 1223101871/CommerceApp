@@ -54,6 +54,7 @@ public class RequsetCallbacks implements Callback<String> {
         if (REQUEST != null) {
             REQUEST.requestEnd();
         }
+        stopLoading();
     }
 
 
@@ -67,6 +68,5 @@ public class RequsetCallbacks implements Callback<String> {
                 }
             }, 1000);
         }
-        stopLoading();
     }
 }
