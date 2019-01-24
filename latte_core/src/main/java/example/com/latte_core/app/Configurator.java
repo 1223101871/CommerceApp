@@ -1,5 +1,9 @@
 package example.com.latte_core.app;
 
+import com.joanzapata.iconify.IconFontDescriptor;
+import com.joanzapata.iconify.Iconify;
+import com.joanzapata.iconify.fonts.FontAwesomeModule;
+
 import java.util.ArrayList;
 import java.util.WeakHashMap;
 
@@ -12,6 +16,7 @@ import okhttp3.Interceptor;
 public class Configurator {
     private static final WeakHashMap<Object, Object> LATTE_CONFIGS = new WeakHashMap<>();
     private static final ArrayList<Interceptor> INTERCEPTORS = new ArrayList<>();
+    private static final ArrayList<IconFontDescriptor> ICONS = new ArrayList<>();
 
     private Configurator() {
         LATTE_CONFIGS.put(ConfigType.CONFIG_READY.name(), false);
@@ -21,6 +26,20 @@ public class Configurator {
         return Holder.INSTANCE;
     }
 
+
+    private void initIcons() {
+        if (ICONS.size() > 0) {
+            final Iconify.IconifyInitializer initializer = Iconify.with(ICONS.get(0));
+            for (int i = 1; i < ICONS.size(); i++) {
+                initializer.with(ICONS.get(i));
+            }
+        }
+    }
+
+    public final Configurator withIcon(IconFontDescriptor descriptor) {
+        ICONS.add(descriptor);
+        return this;
+    }
     private static class Holder {
         private static final Configurator INSTANCE = new Configurator();
     }
@@ -30,6 +49,7 @@ public class Configurator {
     }
 
     public final void configure() {
+        initIcons();
         LATTE_CONFIGS.put(ConfigType.CONFIG_READY, true);
     }
 
