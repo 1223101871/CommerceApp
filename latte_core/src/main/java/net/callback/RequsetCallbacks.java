@@ -66,7 +66,7 @@ public class RequsetCallbacks implements Callback<String> {
                 public void run() {
                     LatteLoader.stopLoading();
                 }
-            }, 1000);
+            }, 0);
         }
     }
 }
