@@ -1,5 +1,8 @@
 package example.com.latte_core.app;
 
+import android.app.Activity;
+import android.os.Handler;
+
 import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
@@ -17,15 +20,17 @@ public class Configurator {
     private static final WeakHashMap<Object, Object> LATTE_CONFIGS = new WeakHashMap<>();
     private static final ArrayList<Interceptor> INTERCEPTORS = new ArrayList<>();
     private static final ArrayList<IconFontDescriptor> ICONS = new ArrayList<>();
+    private static final Handler HANDLER = new Handler();
 
-    private Configurator() {
-        LATTE_CONFIGS.put(ConfigType.CONFIG_READY.name(), false);
-    }
 
     public static Configurator getInstance() {
         return Holder.INSTANCE;
     }
 
+    private Configurator() {
+        LATTE_CONFIGS.put(ConfigType.CONFIG_READY, false);
+        LATTE_CONFIGS.put(ConfigType.HANDLER, HANDLER);
+    }
 
     private void initIcons() {
         if (ICONS.size() > 0) {
@@ -67,6 +72,21 @@ public class Configurator {
     public final Configurator withInterceptors(ArrayList<Interceptor> interceptors){
         INTERCEPTORS.addAll(interceptors);
         LATTE_CONFIGS.put(ConfigType.INTERCEPTOR,INTERCEPTORS);
+        return this;
+    }
+
+    public final Configurator withWeChatAppId(String appId) {
+        LATTE_CONFIGS.put(ConfigType.WE_CHAT_APP_ID, appId);
+        return this;
+    }
+
+    public final Configurator withWeChatAppSecret(String appSecret) {
+        LATTE_CONFIGS.put(ConfigType.WE_CHAT_APP_SECRET, appSecret);
+        return this;
+    }
+
+    public final Configurator withActivity(Activity activity) {
+        LATTE_CONFIGS.put(ConfigType.ACTIVITY, activity);
         return this;
     }
 
