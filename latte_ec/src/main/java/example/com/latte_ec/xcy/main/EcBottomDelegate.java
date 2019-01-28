@@ -8,6 +8,8 @@ import buttom.BaseButtomDelegate;
 import buttom.BottomItemDelegate;
 import buttom.BottomTabBean;
 import buttom.ItemBuilder;
+import example.com.latte_ec.xcy.main.cart.ShopCartDelegate;
+import example.com.latte_ec.xcy.main.discover.DiscoverDelegate;
 import example.com.latte_ec.xcy.main.index.IndexDelegate;
 import example.com.latte_ec.xcy.main.sort.SortDelegate;
 
@@ -23,8 +25,8 @@ public class EcBottomDelegate extends BaseButtomDelegate {
         final LinkedHashMap<BottomTabBean, BottomItemDelegate> items = new LinkedHashMap<>();
         items.put(new BottomTabBean("{fa-home}", "主页"), new IndexDelegate());
         items.put(new BottomTabBean("{fa-sort}", "分类"), new SortDelegate());
-        items.put(new BottomTabBean("{fa-compass}", "发现"), new IndexDelegate());
-        items.put(new BottomTabBean("{fa-shopping-cart}", "购物车"), new IndexDelegate());
+        items.put(new BottomTabBean("{fa-compass}", "发现"), new DiscoverDelegate());
+        items.put(new BottomTabBean("{fa-shopping-cart}", "购物车"), new ShopCartDelegate());
         items.put(new BottomTabBean("{fa-user}", "我的"), new IndexDelegate());
         return builder.addItems(items).build();
     }
