@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import example.com.latte_ui.R;
 
 /**
- * Created by 傅令杰
+ * Created by xcy
  */
 
 public class BannerCreator {

@@ -10,7 +10,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 
 /**
- * Created by 傅令杰
+ * Created by xcy
  */
 
 public class ImageHolder implements Holder<String> {
