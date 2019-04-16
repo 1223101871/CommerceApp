@@ -23,9 +23,6 @@ public class Configurator {
     private static final Handler HANDLER = new Handler();
 
 
-    public static Configurator getInstance() {
-        return Holder.INSTANCE;
-    }
 
     private Configurator() {
         LATTE_CONFIGS.put(ConfigType.CONFIG_READY, false);
@@ -45,8 +42,13 @@ public class Configurator {
         ICONS.add(descriptor);
         return this;
     }
+    //静态内部类实现单例
     private static class Holder {
         private static final Configurator INSTANCE = new Configurator();
+    }
+
+    public static Configurator getInstance() {
+        return Holder.INSTANCE;
     }
 
     final WeakHashMap<Object, Object> getLatteConfigs() {

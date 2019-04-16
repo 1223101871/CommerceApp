@@ -1,4 +1,4 @@
-package example.com.latte_ec.xcy.main.sort.list;
+package example.com.latte_ec.xcy.main.personal.order;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,50 +15,51 @@ import butterknife.BindView;
 import delegates.LatteDelegate;
 import example.com.latte_ec.R;
 import example.com.latte_ec.R2;
-import example.com.latte_ec.xcy.main.sort.SortDelegate;
+import example.com.latte_ec.xcy.main.personal.PersonalDelegate;
 import example.com.latte_ui.recycler.MultipleItemEntity;
 
 /**
- * created by xcy on 2019/1/26
+ * created by xcy on 2019/4/15
  **/
-public class VerticalListDelegate extends LatteDelegate {
-
-    @BindView(R2.id.rv_vertical_menu_list)
+public class OrderListDelegate extends LatteDelegate {
+    private String mType = null;
+    @BindView(R2.id.rv_order_list)
     RecyclerView mRecyclerView = null;
 
     @Override
     public Object setLayout() {
-        return R.layout.delegate_vertical_list;
+        return R.layout.delegate_order_list;
     }
 
-    private void initRecyclerView(){
-        final LinearLayoutManager manager = new LinearLayoutManager(getContext());
-        mRecyclerView.setLayoutManager(manager);
-        //屏蔽动画效果
-        mRecyclerView.setItemAnimator(null);
-
-
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        final Bundle args = getArguments();
+        mType = args.getString(PersonalDelegate.ORDER_TYPE);
     }
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
-        initRecyclerView();
+
     }
 
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
         RestClient.builder()
-                .url("http://192.168.43.47:8080/sort_list.json")
                 .loader(getContext())
+                .url("http://192.168.43.47:8080/order_list.json")
+                .params("type",mType)
                 .success(new ISuccess() {
                     @Override
                     public void onSucess(String response) {
+                        final LinearLayoutManager manager = new LinearLayoutManager(getContext());
+                        mRecyclerView.setLayoutManager(manager);
                         final List<MultipleItemEntity> data =
-                                new VerticalListDataConverter().setJsonData(response).convert();
-                        final SortDelegate delegate = getParentDelegate();
-                        final SortRecyclerAdapter adapter = new SortRecyclerAdapter(data,delegate);
+                                new OrderListDataConvert().setJsonData(response).convert();
+                        final OrderListAdapter adapter = new OrderListAdapter(data);
                         mRecyclerView.setAdapter(adapter);
+//                        mRecyclerView.addOnItemTouchListener(new OrderListClickListener(OrderListDelegate.this));
                     }
                 })
                 .build()

@@ -8,6 +8,7 @@ import example.com.latte_core.app.Latte;
 /**
  * created by xcy on 2019/1/21
  **/
+//测量工具类
 public class DimenUtil {
     public static int getScreenWidth(){
         final Resources resources = Latte.getApplicationContext().getResources();

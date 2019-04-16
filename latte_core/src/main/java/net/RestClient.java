@@ -104,6 +104,7 @@ public class RestClient {
                 break;
         }
         if (call != null) {
+            //异步
             call.enqueue(getRequestCallback());
         }
     }

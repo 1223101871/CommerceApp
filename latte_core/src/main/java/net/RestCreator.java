@@ -26,6 +26,7 @@ public class RestCreator {
         private static final WeakHashMap<String, Object> PARAMS = new WeakHashMap();
     }
 
+    //建立连接
     private static final class RetofitHolder {
         private static final String BASE_URL = Latte.getConfiguration(ConfigType.API_HOST);
         private static final Retrofit RETROFIT_CLIENT = new Retrofit.Builder()
@@ -35,6 +36,8 @@ public class RestCreator {
                 .build();
     }
 
+
+    //对okhttp进行静态初始化
     private static final class OkhttpHolder {
         private static final int TIME_OUT = 60;
         private static final OkHttpClient.Builder BUILDER = new OkHttpClient.Builder();

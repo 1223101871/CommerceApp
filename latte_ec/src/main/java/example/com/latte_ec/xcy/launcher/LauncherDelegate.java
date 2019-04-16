@@ -29,7 +29,7 @@ import util.timer.ITimerListener;
  * created by xcy on 2019/1/22
  **/
 public class LauncherDelegate extends LatteDelegate implements ITimerListener {
-
+    //倒计时的计时器
     private Timer mTimer = null;
     private int mCount = 5;
 

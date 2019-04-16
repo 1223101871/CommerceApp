@@ -9,6 +9,7 @@ import example.com.latte_core.R;
 import me.yokeyword.fragmentation.SupportActivity;
 
 public abstract class ProxyActivity extends SupportActivity {
+    //返回根delegate
     public abstract LatteDelegate setRootDelegate();
 
     @Override
@@ -25,6 +26,7 @@ public abstract class ProxyActivity extends SupportActivity {
         }
     }
 
+    //一个退出，整个应用全部退出，做垃圾回收工作
     @Override
     protected void onDestroy() {
         super.onDestroy();

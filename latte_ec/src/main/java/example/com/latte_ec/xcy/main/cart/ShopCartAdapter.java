@@ -124,7 +124,7 @@ public class ShopCartAdapter extends MultipleRecyclerViewAdapter {
                         final int currentCount = entity.getField(ShopCartItemFields.COUNT);
                         if (Integer.parseInt(tvCount.getText().toString()) > 1) {
                             RestClient.builder()
-                                    .url("shop_cart_count.php")
+                                    .url("http://192.168.43.47:8080/shop_cart_data.json")
                                     .loader(mContext)
                                     .params("count", currentCount)
                                     .success(new ISuccess() {
@@ -152,7 +152,7 @@ public class ShopCartAdapter extends MultipleRecyclerViewAdapter {
                     public void onClick(View v) {
                         final int currentCount = entity.getField(ShopCartItemFields.COUNT);
                         RestClient.builder()
-                                .url("shop_cart_count.php")
+                                .url("http://192.168.43.47:8080/shop_cart_data.json")
                                 .loader(mContext)
                                 .params("count", currentCount)
                                 .success(new ISuccess() {

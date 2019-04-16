@@ -13,6 +13,7 @@ import java.util.WeakHashMap;
 public class LoaderCreator {
     private static final WeakHashMap<String, Indicator> LOADING_MAP = new WeakHashMap<>();
 
+    //以缓存的方式来创建Loader,不用每次创建Loader时都反射一次
     static AVLoadingIndicatorView create(String type, Context context) {
         final AVLoadingIndicatorView avLoadingIndicatorView = new AVLoadingIndicatorView(context);
         if (LOADING_MAP.get(type) == null) {

@@ -66,7 +66,7 @@ public class IndexDelegate extends BottomItemDelegate {
         initRefreshLayout();
         initRefreshLayout();
         initRecyclerView();
-        mRefreshHanlder.firstPage("http://192.168.43.46:8080/goods_details.json");
+        mRefreshHanlder.firstPage("http://192.168.43.47:8080/goods_details.json");
     }
 
     @Override

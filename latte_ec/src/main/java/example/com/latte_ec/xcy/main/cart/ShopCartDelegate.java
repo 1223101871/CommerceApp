@@ -59,7 +59,6 @@ public class ShopCartDelegate extends BottomItemDelegate implements ISuccess,ICa
             mIconSelectAll.setTag(1);
             mAdapter.setIsSelectAll(true);
             //更新RecyclerView的显示状态
-            //更新RecyclerView的显示状态
             mAdapter.notifyItemRangeChanged(0, mAdapter.getItemCount());
         }else {
             mIconSelectAll.setTextColor(Color.GRAY);
@@ -107,6 +106,16 @@ public class ShopCartDelegate extends BottomItemDelegate implements ISuccess,ICa
         checkItemCount();
     }
 
+    @OnClick(R2.id.tv_shop_cart_pay)
+    void onClickPay(){
+
+    }
+
+    //和支付没有关系，仅仅只是创建订单
+    private void createOrder(){
+
+    }
+
     @SuppressWarnings("RestrictedApi")
     private void checkItemCount() {
         final int count = mAdapter.getItemCount();
@@ -140,7 +149,7 @@ public class ShopCartDelegate extends BottomItemDelegate implements ISuccess,ICa
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
         RestClient.builder()
-                .url("http://192.168.43.46:8080/shop_cart_data.json")
+                .url("http://192.168.43.47:8080/shop_cart_data.json")
                 .loader(getContext())
                 .success(this)
                 .build()
@@ -153,15 +162,18 @@ public class ShopCartDelegate extends BottomItemDelegate implements ISuccess,ICa
                 .setJsonData(response)
                 .convert();
         mAdapter = new ShopCartAdapter(data);
+        mAdapter.setCartItemListener(this);
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.setAdapter(mAdapter);
+        mTotalPrice = mAdapter.getTotalPrice();
+        mTvTotalPrice.setText("¥"+String.valueOf(mTotalPrice));
         checkItemCount();
     }
 
     @Override
     public void onItemClick(double itemTotalPrice) {
         final double price = mAdapter.getTotalPrice();
-        mTvTotalPrice.setText(String.valueOf(price));
+        mTvTotalPrice.setText("¥"+String.valueOf(price));
     }
 }

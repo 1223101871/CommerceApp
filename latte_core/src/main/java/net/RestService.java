@@ -31,6 +31,7 @@ public interface RestService {
     @POST
     Call<String> post(@Url String url, @FieldMap Map<String,Object> params);
 
+    //post一个原始数据
     @POST
     Call<String> postRaw(@Url String url, @Body RequestBody body);
 
@@ -44,10 +45,12 @@ public interface RestService {
     @DELETE
     Call<String> delete(@Url String url, @QueryMap Map<String,Object> params);
 
+    //边下载，边写入，防止一次性写入过大的文件，造成闪退
     @Streaming
     @GET
     Call<ResponseBody> download (@Url String url, @QueryMap Map<String,Object> params);
 
+    //上传时要加的注释
     @Multipart
     @POST
     Call<String> upload(@Url String url, @Part MultipartBody.Part file);

@@ -22,7 +22,7 @@ public abstract class BaseInterceptor implements Interceptor {
      * @throws IOException
      */
     @Override
-    public abstract Response intercept(Chain chain);
+    public abstract Response intercept(Chain chain) throws IOException;
 
     protected LinkedHashMap<String, String> getUrlParameters(Chain chain) {
         final HttpUrl url = chain.request().url();

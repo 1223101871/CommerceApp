@@ -6,6 +6,7 @@ import android.os.Handler;
 import java.util.WeakHashMap;
 
 public final class Latte {
+    //context：推荐传入applicationContext
     public static Configurator init(Context context) {
         Configurator.getInstance()
                 .getLatteConfigs()

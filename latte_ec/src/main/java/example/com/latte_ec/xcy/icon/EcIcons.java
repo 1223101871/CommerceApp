@@ -18,7 +18,7 @@ public enum EcIcons implements Icon {
 
     @Override
     public String key() {
-        return name();
+        return name().replace('_', '-');
     }
 
     @Override

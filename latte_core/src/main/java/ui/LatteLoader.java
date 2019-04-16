@@ -25,10 +25,12 @@ public class LatteLoader {
 
     private static final String DEFAULT_LOADER = LoaderStyle.BallSpinFadeLoaderIndicator.name();
 
+    //最好传入当前Context，传入ApplicationContext Dialog会报错
     public static void showLoading(Context context, Enum<LoaderStyle> type) {
-        showLoading(context,type.name());
+        showLoading(context, type.name());
     }
-        public static void showLoading(Context context, String type) {
+
+    public static void showLoading(Context context, String type) {
         final AppCompatDialog dialog = new AppCompatDialog(context, R.style.dialog);
         final AVLoadingIndicatorView avLoadingIndicatorView = LoaderCreator.create(type, context);
         dialog.setContentView(avLoadingIndicatorView);
@@ -60,9 +62,9 @@ public class LatteLoader {
     }
 
     public static void stopLoading() {
-        for (AppCompatDialog dialog : LOADERS){
-            if (dialog!=null){
-                if (dialog.isShowing()){
+        for (AppCompatDialog dialog : LOADERS) {
+            if (dialog != null) {
+                if (dialog.isShowing()) {
                     //会执行uncancel的回调
                     dialog.cancel();
                     //单纯的使dialog消失

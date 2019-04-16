@@ -50,7 +50,7 @@ public class SignUpDelegate extends LatteDelegate {
     void onClickSignUp() {
         if (checkForm()) {
             RestClient.builder()
-                    .url("http://192.168.43.46:8080/user_profile.json")
+                    .url("http://192.168.43.47:8080/user_profile.json")
 //                  .params("","")//提交表单的参数信息
                     .success(new ISuccess() {
                         @Override

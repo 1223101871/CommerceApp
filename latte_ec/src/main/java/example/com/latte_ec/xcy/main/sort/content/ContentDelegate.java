@@ -48,7 +48,7 @@ public class ContentDelegate extends LatteDelegate {
 
     private void initData(){
         RestClient.builder()
-                .url("http://192.168.43.46:8080/sort_content_data.json")
+                .url("http://192.168.43.47:8080/sort_content_data.json")
                 .success(new ISuccess() {
                     @Override
                     public void onSucess(String response) {
